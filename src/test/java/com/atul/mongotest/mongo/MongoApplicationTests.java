@@ -10,4 +10,9 @@ class MongoApplicationTests {
 	void contextLoads() {
 	}
 
+	public int test() {
+		return 1;
+
+	}
+
 }

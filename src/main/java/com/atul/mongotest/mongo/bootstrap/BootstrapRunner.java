@@ -6,6 +6,7 @@ import com.atul.mongotest.mongo.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +24,7 @@ public class BootstrapRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        System.out.println("some dummy");
         System.out.println("started runner ");
         final Person person = new Person(UUID.randomUUID().toString(), "atul");
         final Person person1 = new Person(UUID.randomUUID().toString(), "people");
@@ -36,6 +38,8 @@ public class BootstrapRunner implements CommandLineRunner {
         System.out.println("ended runner ");
 
         System.out.println( "count " + personReactiveRepository.count().block());
+        final Flux<Person> personFlux =  personReactiveRepository.findByFirstName("atul");
+        personFlux.subscribe(System.out::println);
 
 
     }
